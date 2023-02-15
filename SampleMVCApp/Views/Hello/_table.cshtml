@@ -1,0 +1,23 @@
+﻿@{
+    string[] header = (string[])ViewData["header"];
+    string[][] data = (string[][])ViewData["data"];
+}
+
+<table class="table">
+    <tr>
+        @foreach (string item in header)
+        {
+            <th>@item</th>
+        }
+    </tr>
+    @foreach (var row in data)
+    {
+        <tr>
+            @foreach (var item in row)
+            {
+                <td>@item</td>
+            }
+        </tr>
+    }
+</table>
+

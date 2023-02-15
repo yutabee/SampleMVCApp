@@ -7,25 +7,19 @@ namespace SampleMVCApp.Controllers;
 public class HelloController : Controller
 {
 
-    [HttpGet("Hello/{id?}/{name?}")]
-    public IActionResult Index(int id, string name)
+    [HttpGet]
+    public IActionResult Index()
     {
-        ViewData["message"] = "※セッションにIDとNameを保存しました。";
-        MyData ob = new MyData(id, name);
-        String s = ObjectToString(ob);
-        HttpContext.Session.SetString("object", s);
-        ViewData["object"] = ob;
+        ViewData["message"] = "※テーブルの表示";
+        ViewData["header"] = new string[] { "id", "name", "mail" };
+        ViewData["data"] = new string[][]{
+        new string[]{ "1", "Taro", "taro@yamada"},
+        new string[]{ "2", "Hanako", "hanako@flower"},
+        new string[]{ "3", "Sachiko", "sachiko@happy"}
+    };
         return View();
     }
 
-    [HttpGet("Other")]
-    public IActionResult Other()
-    {
-        ViewData["message"] = "保存されたセッションの値を表示します。";
-        String s = HttpContext.Session.GetString("object") ?? "";
-        ViewData["object"] = StringToObject(s);
-        return View("Index");
-    }
 
     // convert object to String.
     private String ObjectToString(MyData ob)
