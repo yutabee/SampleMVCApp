@@ -3,6 +3,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddSession(); //セッションサービスを組み込む
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,5 +25,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.UseSession(); //セッション機能の有効化
 
 app.Run();
