@@ -6,14 +6,21 @@ namespace SampleMVCApp.Controllers
     {
         public IActionResult Index()
         {
-            ViewData["Message"] = "Hello, this is sample message!";
+            ViewData["message"] = "Input your data:";
+            ViewData["name"] = "";
+            ViewData["mail"] = "";
+            ViewData["tel"] = "";
             return View();
         }
 
         [HttpPost]
         public IActionResult Form()
         {
-            ViewData["Message"] = Request.Form["msg"];
+            ViewData["name"] = Request.Form["name"];
+            ViewData["mail"] = Request.Form["mail"];
+            ViewData["tel"] = Request.Form["tel"];
+            ViewData["message"] = ViewData["name"] + ", " +
+                    ViewData["mail"] + ",  " + ViewData["tel"];
             return View("Index");
         }
     }
