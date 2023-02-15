@@ -14,13 +14,14 @@ namespace SampleMVCApp.Controllers
             list.Add("India");
             list.Add("UK");
         }
-        public IActionResult Index()
+
+        [Route("hello/{id?}/{name?}")]
+        public IActionResult Index(int id, string name)
         {
-            ViewData["message"] = "Select item:";
-            ViewData["list"] = "";
-            ViewData["listdata"] = list;
+            ViewData["message"] = "id = " + id + ", name = " + name;
             return View();
         }
+
 
         [HttpPost]
         public IActionResult Form()
