@@ -22,8 +22,12 @@ namespace SampleMVCApp.Controllers
         // GET: People
         public async Task<IActionResult> Index()
         {
+            //Viewの引数にオブジェクトを指定した場合、テンプレートの@Modelに引き渡される
+            //通常デフォルトではページモデルがそのまま渡される
+            //ToListAsyncは各レコードをインスタンス化してリストとして返す
+            //(正確には非同期処理で\\Taskインスタンスとして返す)
               return _context.Person != null ? 
-                          View(await _context.Person.ToListAsync()) :
+                          View(await _context.Person.ToListAsync()) : 
                           Problem("Entity set 'SampleMVCAppContext.Person'  is null.");
         }
 
