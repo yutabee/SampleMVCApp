@@ -38,9 +38,11 @@ namespace SampleMVCApp.Controllers
             {
                 return NotFound();
             }
-
+            //FirstOrDefaultAsyncは一致した最初の要素を返す
+            //一致しなかった場合はnullを返す（エラーにならない）
             var person = await _context.Person
                 .FirstOrDefaultAsync(m => m.PersonId == id);
+            //nullだった場合Notfoundを返す
             if (person == null)
             {
                 return NotFound();
@@ -72,6 +74,7 @@ namespace SampleMVCApp.Controllers
                 //インデックスアクションの名前とパスに指定してリダイレクト
                 return RedirectToAction(nameof(Index));
             }
+            //取得したインスタンスをDetailのViewに渡す
             return View(person);
         }
 
