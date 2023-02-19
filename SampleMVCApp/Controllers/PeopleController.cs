@@ -85,7 +85,9 @@ namespace SampleMVCApp.Controllers
             {
                 return NotFound();
             }
-
+            //FindAsyncでidを指定してモデルのインスタンスを取り出す
+            //FirstOrDefaultAsyncとの違い
+            //FindAsyncはプライマリーキー限定の検索機能
             var person = await _context.Person.FindAsync(id);
             if (person == null)
             {
@@ -101,15 +103,19 @@ namespace SampleMVCApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("PersonId,Name,Mail,Age")] Person person)
         {
+            //Createアクションと異なり、PersonIdもバインドされている
+            //よってCreateでは新規のPersonインスタンス、Editでは既存のPersonインスタンスが渡される
             if (id != person.PersonId)
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
+           
+            if (ModelState.IsValid)　//バリデーションのチェック
             {
+                //更新作業の場合は例外が発生する可能性もある
                 try
                 {
+                    //インスタンスの更新と反映
                     _context.Update(person);
                     await _context.SaveChangesAsync();
                 }
