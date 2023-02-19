@@ -58,14 +58,18 @@ namespace SampleMVCApp.Controllers
         // POST: People/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost]　//POST送信を受け取る
+        [ValidateAntiForgeryToken] // XSRF攻撃対策のため
         public async Task<IActionResult> Create([Bind("PersonId,Name,Mail,Age")] Person person)
         {
+            //フォームから送信された内容をバインドを用いいてPersonインスタンスとして受け取る
+            //バリデーションのチェック
             if (ModelState.IsValid)
             {
+                //問題なければPersonインスタンスをデータベースコンテキストに追加して保存
                 _context.Add(person);
                 await _context.SaveChangesAsync();
+                //インデックスアクションの名前とパスに指定してリダイレクト
                 return RedirectToAction(nameof(Index));
             }
             return View(person);
