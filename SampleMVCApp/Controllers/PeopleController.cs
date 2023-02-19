@@ -154,6 +154,7 @@ namespace SampleMVCApp.Controllers
         }
 
         // POST: People/Delete/5
+        //メソッド名がDeleteConfirmedとなっているため、Deleteアクションであることを明示する（Action("Delete")）
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -174,6 +175,7 @@ namespace SampleMVCApp.Controllers
 
         private bool PersonExists(int id)
         {
+            //レコードが存在すれば指定のレコードが既に存在しているかどうかわかる。
           return (_context.Person?.Any(e => e.PersonId == id)).GetValueOrDefault();
         }
     }
