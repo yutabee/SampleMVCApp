@@ -19,6 +19,20 @@ namespace SampleMVCApp.Controllers
             _context = context;
         }
 
+        public async Task<IActionResult> Find()
+        {
+            return View(await _context.Person.ToListAsync());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Find(string FindStr)
+        {
+            var People = await _context.Person.Where(m => m.Name == FindStr).ToListAsync();
+            return View(People);
+        }
+
+
         // GET: People
         public async Task<IActionResult> Index()
         {

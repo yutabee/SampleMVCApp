@@ -1,0 +1,47 @@
+﻿@page
+@model IEnumerable<SampleMVCApp.Models.Person>;
+
+@{
+    ViewData["Title"] = "Find";
+}
+
+<h1>Find</h1>
+
+<form asp-action="Find">
+    <div class="input-group">
+        <input type="text" name="FindStr" class="form-control me-1" />
+        <span class="input-group-btn">
+            <input type="submit" class="btn btn-primary px-4" name="Click" />
+        </span>
+    </div>
+</form>
+<hr />
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th>PersonId</th>
+            <th>Name</th>
+            <th>Mail</th>
+            <th>Age</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+                <tr>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.PersonId)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Mail)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
